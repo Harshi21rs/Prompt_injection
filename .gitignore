@@ -1,0 +1,47 @@
+# Environments
+.env
+.venv/
+venv/
+env/
+.env.example
+# Python caches and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+dist/
+build/
+.npm/
+package-lock.json
+
+# macOS / Windows OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+test_local.db
+
+# Logs and test outputs
+*.log
+evaluation_report.json
+evaluation_report.md
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# AWS SAM
+.aws-sam/
+packaged.yaml

@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Description: >
+  PS-3.2 Prompt Injection Behavioral Detector
+  Deployed on AWS Lambda + API Gateway (always-free tier).
+  No NAT gateway, load balancer, or other metered resource is attached.
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 256
+    Environment:
+      Variables:
+        DATABASE_URL: !Sub "sqlite:////tmp/behavioral_anomaly_detector.db"
+        LOG_LEVEL: INFO
+        # GROQ_API_KEY: Set via SSM Parameter Store or env override.
+        # Leave unset to use the free offline deterministic simulator.
+
+Resources:
+  BehavioralDetectorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      ImageUri: behavioral-detector:latest
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+        RootApiEvent:
+          Type: Api
+          Properties:
+            Path: /
+            Method: ANY
+    Metadata:
+      DockerTag: latest
+      DockerContext: .
+      Dockerfile: Dockerfile
+
+Outputs:
+  ApiUrl:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
