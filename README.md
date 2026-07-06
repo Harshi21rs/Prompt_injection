@@ -1,4 +1,4 @@
-# PS-3.2: Prompt Injection Behavioral Detector
+# Prompt Injection Behavioral Detector
 
 Detects successful prompt injection by observing **what the agent did**, not by inspecting prompt text.  
 Indirect injections embedded in tool output (poisoned KB articles, order records, internal files) never touch the user-facing prompt — this detector catches them anyway.
