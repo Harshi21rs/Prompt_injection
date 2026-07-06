@@ -295,10 +295,3 @@ others are (`Base.metadata.create_all` on startup) -- no migration step required
 
 ---
 
-## AWS Deployment (one command, $0)
-
-```bash
-sam build && sam deploy --guided
-```
-
-Requires AWS CLI + SAM CLI (both free). See `template.yaml`.
